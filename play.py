@@ -30,7 +30,7 @@ class play():
         x, y = self.width_height
         glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
         glutInitWindowSize(x, y)
-        glutInitWindowPosition(200, 900)
+        glutInitWindowPosition(0, 0)
         glutCreateWindow(b'Snake Villa')
 
         glLoadIdentity()
@@ -46,12 +46,12 @@ class play():
 
         if self.screen_enabled == 1:       # home screen
             self.draw_screen_home()
-        elif self.screen_enabled == 2:     # tela do jogo
+        elif self.screen_enabled == 2:    
             if self.rules_game() == 0:
                 self.draw_screen_game()
             glutPostRedisplay()
             time.sleep(1 / self.update_rate)
-        elif self.screen_enabled == 3:     # tela final game over
+        elif self.screen_enabled == 3:    
             self.draw_game_over()
 
         glFlush()
@@ -59,7 +59,7 @@ class play():
     def draw_screen_home(self):
         x, y = self.width_height
         glColor(1.0, 1.0, 1.0)
-        self.draw_text(" Snake Game", x*0.45, y/2)
+        self.draw_text(" Snake Villa", x*0.45, y/2)
         self.draw_rectangle(round(x*0.45), round(y*0.4), round(x*0.6), round(y*0.45))
         self.draw_text("START", round(x*0.48), round(y*0.41))
         self.draw_text("Good Luck, Have Fun!", round(x*0.40), round(y*0.35))
@@ -90,20 +90,17 @@ class play():
         head_position = head.get_position()
         color = self.snake.get_color()
         
-        # testing collision with the color itself
         for dot in color[:]:
-            if dot.get_position() == head_position: # colidiu com o proprio color
+            if dot.get_position() == head_position:
                 self.screen_enabled = 3
                 return 1
 
         self.snake.move()
 
-        #  testing for collision with boundary
         if self.boundary.check_collision(head_position):
             self.screen_enabled = 3
             return 1
 
-        # testando se eat algo
         if self.food.get_position() == head_position:
             self.snake.inlarge(self.food.get_position())
             self.sort_food()
@@ -191,16 +188,16 @@ class play():
 
     def keyboard_specials(self, key,  x,  y):
         if self.screen_enabled == 2:
-            if key == GLUT_KEY_LEFT:    # seta esquerda
+            if key == GLUT_KEY_LEFT:  
                 if self.snake.get_orientation() != 0:
                     self.change_orientation = 180
-            elif key == GLUT_KEY_RIGHT:   #seta direita
+            elif key == GLUT_KEY_RIGHT: 
                 if self.snake.get_orientation() != 180:
                     self.change_orientation = 0
-            elif key == GLUT_KEY_UP:      # seta cima
+            elif key == GLUT_KEY_UP: 
                 if self.snake.get_orientation() != 270:
                     self.change_orientation = 90
-            elif key == GLUT_KEY_DOWN:    # seta baxo
+            elif key == GLUT_KEY_DOWN: 
                 if self.snake.get_orientation() != 90:
                     self.change_orientation = 270
 
@@ -211,9 +208,9 @@ class play():
                 self.cheat -= 1
 
     def keyboard(self, key, x, y):
-        if ord(key) == 27:   # esc
+        if ord(key) == 27: 
             exit(0);
-        elif ord(key) == 32: # space
+        elif ord(key) == 32:
             if self.screen_enabled == 2:
                 self.screen_enabled = 4
                 glutPostRedisplay()
