@@ -1,4 +1,5 @@
 class Object():
+    
     def __init__(self, orientation, position, color, size):
         self.__orientation = orientation
         self.__position = position

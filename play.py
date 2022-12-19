@@ -107,8 +107,6 @@ class play():
             self.score += 10
             if self.score > self.score_maximum:
                 self.score_maximum = self.score
-        
-
         self.update_rate = self.cheat + 5 + self.score / 50
         return 0
 
@@ -151,7 +149,6 @@ class play():
         x, y = post_initial
         x *= side
         y *= side
-
         glBegin(GL_POLYGON)
         glVertex2i(x, y)
         glVertex2i(x + side, y)

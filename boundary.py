@@ -1,7 +1,6 @@
 from object import Object
 import colors as Colors
 
-
 class Boundary():
     def __init__(self, canvas_size, size=30):
         [xscreen, yscreen] = canvas_size
